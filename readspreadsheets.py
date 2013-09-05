@@ -23,17 +23,18 @@ insertion_query = """INSERT INTO sales
     YearBuilt, TaxClassAtTimeOfSale,
     BuildingClassAtTimeOfSale, SalePrice, SaleDate)
     VALUES
-   (%s,%s,%s,
-   %s,%s,%s,%s,%s,
-   %s,%s,%s,%s,%s,
-   %s,%s,%s,
-   %s,%s,
-   %s,%s,%s)
+        (%s,%s,%s,
+        %s,%s,%s,%s,%s,
+        %s,%s,%s,%s,%s,
+        %s,%s,%s,
+        %s,%s,
+        %s,%s,%s)
+    ON DUPLICATE KEY UPDATE Borough = Borough;
     """
 
 sheetsdir = "housingsheets"
 # Possibly missed file 5 (I think Queens 2012)
-files = [os.path.join(sheetsdir, filename) for filename in os.listdir(sheetsdir)][6:]
+files = [os.path.join(sheetsdir, filename) for filename in os.listdir(sheetsdir)]
 
 c = db.cursor()
 for file in files:
